@@ -1,0 +1,658 @@
+
+import random
+import sys
+userhealth = 200
+bosshealth = 500
+playerone = 350
+playertwo = 350
+heal = 0
+attack = 0
+healuses = 0
+attackuses = 0
+specialuses = 0
+healoneuses = 0
+attackoneuses = 0
+specialoneuses = 0
+healtwouses = 0
+attacktwouses = 0
+specialtwouses = 0
+
+
+
+def usermove():
+    global userhealth
+    global bosshealth
+    global heal
+    global attack
+    global healuses
+    global attackuses
+    global specialuses
+    print('')
+    if userhealth <= 0:
+        retry = input('You lost! Would you like to retry? Answer with yes or no. ')
+        if retry.lower() == 'quit':
+            sys.exit("Whatever you're doing can't be that important.")
+        elif retry.lower() == 'yes':
+            userhealth = 200
+            mode = input('Would you like to play on hard mode? Answer with yes or no. ')
+            if mode.lower() == 'yes':
+                print('Good luck.')
+                bosshealth = 750
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+            elif mode.lower() == 'no':
+                print('Good luck coward.')
+                bosshealth = 500
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+            else:
+                mode = input('Answer with yes or no. ')
+                if mode.lower() == 'quit':
+                    sys.exit("Whatever you need to do can't be that important.")
+                elif mode.lower() == 'yes':
+                    print('Good luck.')
+                    bosshealth = 750
+                    print('')
+                    print('You have encountered a strong enemy!')
+                    print('')
+                    usermove()
+                elif mode.lower() == 'no':
+                    print('Good luck coward.')
+                    bosshealth = 500
+                    print('')
+                    print('You have encountered a strong enemy!')
+                    print('')
+                    usermove()
+                else:
+                    print('Fine.')
+                    bosshealth = 1000
+                    print('')
+                    print('You have encountered a strong enemy!')
+                    print('')
+                    usermove()
+        elif retry.lower() == 'no':
+            sys.exit('lmao git gud')
+        else:
+            retry = input('Answer with yes or no. ')
+            if retry.lower() == 'yes':
+                userhealth = 200
+                mode = input('Would you like to play on hard mode? Answer with yes or no. ')
+                if mode.lower() == 'yes':
+                    print('Good luck.')
+                    bosshealth = 750
+                    usermove()
+                elif mode.lower() == 'no':
+                    print('Good luck coward.')
+                    bosshealth = 500
+                    usermove()
+                else:
+                    mode = input('Answer with yes or no. ')
+                    if mode.lower() == 'yes':
+                        bosshealth = 750
+                        print('Good luck.')
+                        usermove()
+                    elif mode.lower() == 'no':
+                        bosshealth = 500
+                        print('Good luck coward.')
+                        usermove()
+                    else:
+                        print('Fine.')
+                        bosshealth = 1000
+            elif retry.lower() == 'no':
+                sys.exit("Whatever you're doing can't be that important.")
+            else:
+                sys.exit('bruh you cant even quit right')
+                        
+    print("<(Your turn!)>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+    print('')
+    action = input(f'Would you like to attack (a), heal (h), or special (s)? You have {userhealth} health, and the enemy has {bosshealth} health. ')
+    print('')
+    if action.lower() == 'quit' or action.lower() == 'no' or action.lower() == 'nope' or action.lower() == 'back':
+        sys.exit('lmao coward')
+    elif action.lower() == 'attack' or action.lower() == 'a':
+        healuses = 0
+        specialuses = 0
+        attack = random.randint(20,30)
+        bosshealth = bosshealth - attack
+        attackuses = attackuses + 1
+        print(f'You attacked the enemy for {attack} health! The enemy now has {bosshealth} health.')
+    elif action.lower() == 'heal' or action.lower() == 'h':
+        attackuses = 0
+        specialuses = 0
+        heal = random.randint(30,50)
+        userhealth = userhealth + heal
+        healuses = healuses + 1
+        print(f'You healed yourself for {heal} health! You now have {userhealth} health.')
+    elif action.lower() == 'special' or action.lower() == 's':
+        healuses = 0
+        attackuses = 0
+        specialuses = specialuses + 1
+        roll = random.randint(1, 11)
+        print(f'You rolled a {roll}!')
+        if roll == 1:
+            print('You rolled poorly! You lose 15 health.')
+            userhealth = userhealth - 15
+            print(f'You now have {userhealth} health.')
+        elif roll == 2:
+            print('You rolled poorly! You lose 10 health.')
+            userhealth = userhealth - 10
+            print(f'You now have {userhealth} health.')
+        elif roll == 3:
+            print('You rolled poorly! You lose 5 health.')
+            userhealth = userhealth - 5
+            print(f'The enemy now has {userhealth} health.')
+        elif roll == 4:
+            print('You rolled ok! You get a lucky swing in, and the enemy loses 40 health!')
+            bosshealth = bosshealth - 40
+            print(f'The enemy now has {bosshealth} health.')
+        elif roll == 5:
+            print('You rolled well! You cast heal, and you regain 40 health!')
+            userhealth = userhealth + 40
+            print(f'You now have {userhealth} health.')
+        elif roll == 6:
+            print('You rolled well! You cast heal, and you regain 50 health!')
+            userhealth = userhealth + 50
+            print(f'You now have {userhealth} health.')
+        elif roll == 7:
+            print('You rolled well! You cast magic missile, and the enemy loses 50 health!')
+            bosshealth = bosshealth - 50
+            print(f'The enemy now has {bosshealth} health.')
+        elif roll == 8:
+            print('You rolled really well! You cast lightning bolt, and the enemy loses 75 health!')
+            bosshealth = bosshealth - 75
+            print(f'The enemy now has {bosshealth} health.')
+        elif roll == 9:
+            print('You rolled really well! You cast fireball, and the enemy loses 100 health!')
+            bosshealth = bosshealth - 100
+            print(f'The enemy now has {bosshealth} health.')
+        elif roll == 10:
+            print('You rolled perfectly! You cast maneuver, and the enemy loses 125 health, while you regain 30 health!')
+            userhealth = userhealth + 30
+            bosshealth = bosshealth - 100
+            print(f'You now have {userhealth} health.')
+            print(f'The enemy now has {bosshealth} health.')
+        elif roll == 11:
+            print('You rolled perfectly! You cast maneuver, damaging the enemy and giving you an extra turn!')
+            bosshealth = bosshealth - 75
+            print(f'The enemy now has {bosshealth} health.')
+            usermove()
+    else:
+        print('oopsy you did the wrong thing')
+        usermove()
+    if attackuses > 2 or healuses > 2 or specialuses > 2:
+        print('')
+        print("Because you spammed the same move, you lost 25 health because the gods said so!")
+        userhealth = userhealth - 25
+        healuses = 0
+        attackuses = 0
+        specialuses = 0
+    bossmove()
+
+
+
+
+def bossmove():
+    global userhealth
+    global bosshealth
+    print('')
+    print('')
+    if userhealth <= 0:
+        retry = input('You won! Would you like to rego againtry? Answer with yes or no. ')
+        if retry.lower() == 'quit':
+            sys.exit("Whatever you're doing can't be that important.")
+        elif retry.lower() == 'yes':
+            userhealth = 200
+            mode = input('Would you like to play on hard mode? Answer with yes or no. ')
+            if mode.lower() == 'yes':
+                print('Good luck.')
+                bosshealth = 750
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+            elif mode.lower() == 'no':
+                print('Good luck coward.')
+                bosshealth = 500
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+            else:
+                mode = input('Answer with yes or no. ')
+                if mode.lower() == 'quit':
+                    sys.exit("Whatever you need to do can't be that important.")
+                elif mode.lower() == 'yes':
+                    print('Good luck.')
+                    bosshealth = 750
+                    print('')
+                    print('You have encountered a strong enemy!')
+                    print('')
+                    usermove()
+                elif mode.lower() == 'no':
+                    print('Good luck coward.')
+                    bosshealth = 500
+                    print('')
+                    print('You have encountered a strong enemy!')
+                    print('')
+                    usermove()
+                else:
+                    print('Fine.')
+                    bosshealth = 1000
+                    print('')
+                    print('You have encountered a strong enemy!')
+                    print('')
+                    usermove()
+        elif retry.lower() == 'no':
+            sys.exit('lmao git gud')
+        else:
+            retry = input('Answer with yes or no. ')
+            if retry.lower() == 'yes':
+                userhealth = 200
+                mode = input('Would you like to play on hard mode? Answer with yes or no. ')
+                if mode.lower() == 'yes':
+                    print('Good luck.')
+                    bosshealth = 750
+                    usermove()
+                elif mode.lower() == 'no':
+                    print('Good luck coward.')
+                    bosshealth = 500
+                    usermove()
+                else:
+                    mode = input('Answer with yes or no. ')
+                    if mode.lower() == 'yes':
+                        bosshealth = 750
+                        print('Good luck.')
+                        usermove()
+                    elif mode.lower() == 'no':
+                        bosshealth = 500
+                        print('Good luck coward.')
+                        usermove()
+                    else:
+                        print('Fine.')
+                        bosshealth = 1000
+            elif retry.lower() == 'no':
+                sys.exit("Whatever you're doing can't be that important.")
+            else:
+                sys.exit('bruh you cant even quit right')
+
+    print("<(Enemy's turn!)>-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+    print('')
+    special = random.randint(1,100)
+    if special == 100:
+        print('The enemy has landed a critical hit, instantly killing you!')
+        userhealth = 0
+        usermove()
+
+    roll = random.randint(15,35)
+    userhealth = userhealth - roll
+    print(f'The enemy has attacked you for {roll} health! You now have {userhealth} health.')
+    print('')
+    usermove()
+
+
+
+def playeronemove():
+    global playerone
+    global playertwo
+    global heal
+    global attack
+    global healoneuses
+    global attackoneuses
+    global specialoneuses
+    print('')
+    if playerone <= 0:
+        retry = input('Player 2 won! Would you like to go again? ')
+        if retry.lower() == 'yes':
+            playerone = 500
+            playertwo = 500
+            playeronemove()
+        elif retry.lower() == 'no':
+            sys.exit('lmao git gud')
+        else:
+            retry = input('Answer with yes or no. ')
+            if retry.lower() == 'yes':
+                playerone = 500
+                playertwo = 500
+                playeronemove()
+            elif retry.lower() == 'no':
+                sys.exit("Whatever you're doing can't be that important.")
+            else:
+                sys.exit('bruh you cant even quit right')
+    print('')
+    print("<(Player 1's turn!)>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+    print('')
+    action = input(f'Would you like to attack (a), heal (h), or special (s)? You have {playerone} health, and player 2 has {playertwo} health. ')
+    print('')
+    if action.lower() == 'quit' or action.lower() == 'no' or action.lower() == 'nope' or action.lower() == 'back':
+        retry = input('Player 2 won by default because Player 1 is a coward! Would you like to go again? ')
+        if retry.lower() == 'yes':
+            playerone = 350
+            playertwo = 350
+            playeronemove()
+        elif retry.lower() == 'no':
+            sys.exit("Whatever you're doing can't be that important.")
+        else:
+            retry = input('Answer with yes or no. ')
+            if retry.lower() == 'yes':
+                playerone = 350
+                playertwo = 350
+                playeronemove()
+            elif retry.lower() == 'no':
+                sys.exit("Whatever you're doing can't be that important.")
+            else:
+                sys.exit('bruh you cant even quit right')
+    elif action.lower() == 'attack' or action.lower() == 'a':
+        healoneuses = 0
+        specialoneuses = 0
+        attack = random.randint(20,30)
+        playertwo = playertwo - attack
+        attackoneuses = attackoneuses + 1
+        print(f'You attacked the enemy for {attack} health! The enemy now has {playertwo} health.')
+    elif action.lower() == 'heal' or action.lower() == 'h':
+        attackoneuses = 0
+        specialoneuses = 0
+        heal = random.randint(20,40)
+        playerone = playerone + heal
+        healoneuses = healoneuses + 1
+        print(f'You healed yourself for {heal} health! You now have {playerone} health.')
+    elif action.lower() == 'special' or action.lower() == 's':
+        healoneuses = 0
+        attackoneuses = 0
+        specialoneuses = specialoneuses + 1
+        roll = random.randint(1, 11)
+        print(f'You rolled a {roll}!')
+        if roll == 1:
+            print('You rolled poorly! You lose 15 health.')
+            playerone = playerone - 15
+            print(f'You now have {playerone} health.')
+        elif roll == 2:
+            print('You rolled poorly! You lose 10 health.')
+            playerone = playerone - 10
+            print(f'You now have {playerone} health.')
+        elif roll == 3:
+            print('You rolled poorly! You lose 5 health.')
+            playerone = playerone - 5
+            print(f'The enemy now has {playerone} health.')
+        elif roll == 4:
+            print('You rolled ok! You get a lucky swing in, and the enemy loses 40 health!')
+            playertwo = playertwo - 40
+            print(f'The enemy now has {playertwo} health.')
+        elif roll == 5:
+            print('You rolled well! You cast heal, and you regain 40 health!')
+            playerone = playerone + 40
+            print(f'You now have {playerone} health.')
+        elif roll == 6:
+            print('You rolled well! You cast heal, and you regain 50 health!')
+            playerone = playerone + 50
+            print(f'You now have {playerone} health.')
+        elif roll == 7:
+            print('You rolled well! You cast magic missile, and the enemy loses 50 health!')
+            playertwo = playertwo - 50
+            print(f'The enemy now has {playertwo} health.')
+        elif roll == 8:
+            print('You rolled really well! You cast lightning bolt, and the enemy loses 75 health!')
+            playertwo = playertwo - 75
+            print(f'The enemy now has {playertwo} health.')
+        elif roll == 9:
+            print('You rolled really well! You cast fireball, and the enemy loses 100 health!')
+            playertwo = playertwo - 100
+            print(f'The enemy now has {playertwo} health.')
+        elif roll == 10:
+            print('You rolled perfectly! You cast maneuver, and the enemy loses 125 health, while you regain 30 health!')
+            playerone = playerone + 30
+            playertwo = playertwo - 100
+            print(f'You now have {playerone} health.')
+            print(f'The enemy now has {playertwo} health.')
+        elif roll == 11:
+            print('You rolled perfectly! You cast maneuver, damaging the enemy and giving you an extra turn!')
+            playertwo = playertwo - 75
+            print(f'The enemy now has {playertwo} health.')
+            playeronemove()
+    else:
+        print('oopsy you did the wrong thing')
+        playeronemove()
+    if attackoneuses > 2 or healoneuses > 2 or specialoneuses > 2:
+        print('')
+        print("Because you spammed the same move, you lost 25 health because the gods said so!")
+        playerone = playerone - 25
+    playertwomove()
+
+
+
+def playertwomove():
+    global playerone
+    global playertwo
+    global heal
+    global attack
+    global healtwouses
+    global attacktwouses
+    global specialtwouses
+    print('')
+    if playertwo <= 0:
+        retry = input('Player 1 won! Would you like to go again? ')
+        if retry.lower() == 'yes':
+            playerone = 500
+            playertwo = 500
+            playeronemove()
+        elif retry.lower() == 'no':
+            sys.exit("Whatever you're doing can't be that important.")
+        else:
+            retry = input('Answer with yes or no. ')
+            if retry.lower() == 'yes':
+                playerone = 500
+                playertwo = 500
+                playeronemove()
+            elif retry.lower() == 'no':
+                sys.exit("Whatever you're doing can't be that important.")
+            else:
+                sys.exit('bruh you cant even quit right')
+                
+    print('')
+    print("<(Player 2's turn!)>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+    print('')
+    action = input(f"Would you like to attack (a), heal (h), or special (s)? You have {playertwo} health, and player 1 has {playerone} health. ")
+    print('')
+    if action.lower() == 'quit' or action.lower() == 'no' or action.lower() == 'nope' or action.lower() == 'back':
+            retry = input('Player 2 won by default because Player 1 is a coward! Would you like to go again? ')
+            if retry.lower() == 'yes':
+                playerone = 350
+                playertwo = 350
+                playeronemove()
+            elif retry.lower() == 'no':
+                sys.exit("Whatever you're doing can't be that important.")
+            else:
+                retry = input('Answer with yes or no. ')
+                if retry.lower() == 'yes':
+                    playerone = 350
+                    playertwo = 350
+                    playeronemove()
+                elif retry.lower() == 'no':
+                    sys.exit("Whatever you're doing can't be that important.")
+                else:
+                    sys.exit('bruh you cant even quit right')
+    elif action.lower() == 'attack' or action.lower() == 'a':
+        healtwouses = 0
+        specialtwouses = 0
+        attack = random.randint(20,30)
+        playerone = playerone - attack
+        attacktwouses = attacktwouses + 1
+        print(f'You attacked the enemy for {attack} health! The enemy now has {playerone} health.')
+    elif action.lower() == 'heal' or action.lower() == 'h':
+        attacktwouses = 0
+        specialtwouses = 0
+        heal = random.randint(20,50)
+        playertwo = playertwo + heal
+        healtwouses = healtwouses + 1
+        print(f'You healed yourself for {heal} health! You now have {playertwo} health.')
+    elif action.lower() == 'special' or action.lower() == 's':
+        healtwouses = 0
+        attacktwouses = 0
+        specialtwouses = specialtwouses + 1
+        roll = random.randint(1, 11)
+        print(f'You rolled a {roll}!')
+        if roll == 1:
+            print('You rolled poorly! You lose 15 health.')
+            playertwo = playertwo - 15
+            print(f'You now have {playertwo} health.')
+        elif roll == 2:
+            print('You rolled poorly! You lose 10 health.')
+            playertwo = playertwo - 10
+            print(f'You now have {playertwo} health.')
+        elif roll == 3:
+            print('You rolled poorly! You lose 5 health.')
+            playertwo = playertwo - 5
+            print(f'The enemy now has {playertwo} health.')
+        elif roll == 4:
+            print('You rolled ok! You get a lucky swing in, and the enemy loses 40 health!')
+            playerone = playerone - 40
+            print(f'The enemy now has {playerone} health.')
+        elif roll == 5:
+            print('You rolled well! You cast heal, and you regain 40 health!')
+            playerone = playerone + 40
+            print(f'You now have {playerone} health.')
+        elif roll == 6:
+            print('You rolled well! You cast heal, and you regain 50 health!')
+            playertwo = playertwo + 50
+            print(f'You now have {playertwo} health.')
+        elif roll == 7:
+            print('You rolled well! You cast magic missile, and the enemy loses 50 health!')
+            playerone = playerone - 50
+            print(f'The enemy now has {playerone} health.')
+        elif roll == 8:
+            print('You rolled really well! You cast lightning bolt, and the enemy loses 75 health!')
+            playerone = playerone - 75
+            print(f'The enemy now has {playerone} health.')
+        elif roll == 9:
+            print('You rolled really well! You cast fireball, and the enemy loses 100 health!')
+            playerone = playerone - 100
+            print(f'The enemy now has {playerone} health.')
+        elif roll == 10:
+            print('You rolled perfectly! You cast maneuver, and the enemy loses 125 health, while you regain 30 health!')
+            playertwo = playertwo + 30
+            playerone = playerone - 100
+            print(f'You now have {playertwo} health.')
+            print(f'The enemy now has {playerone} health.')
+        elif roll == 11:
+            print('You rolled perfectly! You cast maneuver, damaging the enemy and giving you an extra turn!')
+            playerone = playerone - 75
+            print(f'The enemy now has {playerone} health.')
+            playertwomove()
+    else:
+        print('oopsy you did the wrong thing')
+        playertwomove()
+    if attacktwouses > 2 or healtwouses > 2 or specialtwouses > 2:
+        print('')
+        print("Because you spammed the same move, you lost 25 health because the gods said so!")
+        playertwo = playertwo - 25
+    playeronemove()
+
+
+
+print('')
+print('-------------------------------------------------------------------------------------<( WELCOME TO BATTLE GAME )>-------------------------------------------------------------------------------------')
+print('')
+mode = input('Would you like to play with another player or are you sad and alone? Answer with yes or no. ')
+if mode.lower() == 'quit':
+    sys.exit("Whatever you need to do can't be that important.")
+elif mode.lower() == 'no':
+    print('haha lonely')
+    print('')
+    mode = input('Would you like to play on hard mode? Answer with yes or no. ')
+    if mode.lower() == 'yes':
+        print('Good luck.')
+        bosshealth = 750
+        print('')
+        print('You have encountered a strong enemy!')
+        print('')
+        usermove()
+    elif mode.lower() == 'no':
+        print('Good luck coward.')
+        bosshealth = 500
+        print('')
+        print('You have encountered a strong enemy!')
+        print('')
+        usermove()
+    else:
+        mode = input('Answer with yes or no. ')
+        if mode.lower() == 'quit':
+            sys.exit("Whatever you need to do can't be that important.")
+        elif mode.lower() == 'yes':
+            print('Good luck.')
+            bosshealth = 750
+            print('')
+            print('You have encountered a strong enemy!')
+            print('')
+            usermove()
+        elif mode.lower() == 'no':
+            print('Good luck coward.')
+            bosshealth = 500
+            print('')
+            print('You have encountered a strong enemy!')
+            print('')
+            usermove()
+        else:
+            print('Fine.')
+            bosshealth = 1000
+            print('')
+            print('You have encountered a strong enemy!')
+            print('')
+            usermove()
+elif mode.lower() == 'yes':
+    print('')
+    print('BATTLE TO THE DEATH')
+    playeronemove()
+else:
+    mode = input('Answer with yes or no. ')
+    if mode.lower() == 'quit':
+        sys.exit("Whatever you need to do can't be that important.")
+    elif mode.lower() == 'no':
+        print('haha lonely')
+        print('')
+        mode = input('Would you like to play on hard mode? Answer with yes or no. ')
+        if mode.lower() == 'yes':
+            print('Good luck.')
+            bosshealth = 750
+            print('')
+            print('You have encountered a strong enemy!')
+            print('')
+            usermove()
+        elif mode.lower() == 'no':
+            print('Good luck.')
+            bosshealth = 500
+            print('')
+            print('You have encountered a strong enemy!')
+            print('')
+            usermove()
+        else:
+            mode = input('Answer with yes or no. ')
+            if mode.lower() == 'yes':
+                print('Good luck.')
+                bosshealth = 750
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+            elif mode.lower() == 'no':
+                print('Good luck coward.')
+                bosshealth = 500
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+            else:
+                print('Fine.')
+                bosshealth = 1000
+                print('')
+                print('You have encountered a strong enemy!')
+                print('')
+                usermove()
+    elif mode.lower() == 'yes':
+        print('')
+        print('BATTLE TO THE DEATH')
+        playeronemove()
+    else:
+        sys.exit('bruh')
